@@ -48,76 +48,76 @@ public class SpringMVCTest {
 	}
 	
 	/**
-	 * 1. ÓĞ @ModelAttribute ±ê¼ÇµÄ·½·¨, »áÔÚÃ¿¸öÄ¿±ê·½·¨Ö´ĞĞÖ®Ç°±» SpringMVC µ÷ÓÃ! 
-	 * 2. @ModelAttribute ×¢½âÒ²¿ÉÒÔÀ´ĞŞÊÎÄ¿±ê·½·¨ POJO ÀàĞÍµÄÈë²Î, Æä value ÊôĞÔÖµÓĞÈçÏÂµÄ×÷ÓÃ:
-	 * 1). SpringMVC »áÊ¹ÓÃ value ÊôĞÔÖµÔÚ implicitModel ÖĞ²éÕÒ¶ÔÓ¦µÄ¶ÔÏó, Èô´æÔÚÔò»áÖ±½Ó´«Èëµ½Ä¿±ê·½·¨µÄÈë²ÎÖĞ.
-	 * 2). SpringMVC »áÒ» value Îª key, POJO ÀàĞÍµÄ¶ÔÏóÎª value, ´æÈëµ½ request ÖĞ. 
+	 * 1. æœ‰ @ModelAttribute æ ‡è®°çš„æ–¹æ³•, ä¼šåœ¨æ¯ä¸ªç›®æ ‡æ–¹æ³•æ‰§è¡Œä¹‹å‰è¢« SpringMVC è°ƒç”¨! 
+	 * 2. @ModelAttribute æ³¨è§£ä¹Ÿå¯ä»¥æ¥ä¿®é¥°ç›®æ ‡æ–¹æ³• POJO ç±»å‹çš„å…¥å‚, å…¶ value å±æ€§å€¼æœ‰å¦‚ä¸‹çš„ä½œç”¨:
+	 * 1). SpringMVC ä¼šä½¿ç”¨ value å±æ€§å€¼åœ¨ implicitModel ä¸­æŸ¥æ‰¾å¯¹åº”çš„å¯¹è±¡, è‹¥å­˜åœ¨åˆ™ä¼šç›´æ¥ä¼ å…¥åˆ°ç›®æ ‡æ–¹æ³•çš„å…¥å‚ä¸­.
+	 * 2). SpringMVC ä¼šä¸€ value ä¸º key, POJO ç±»å‹çš„å¯¹è±¡ä¸º value, å­˜å…¥åˆ° request ä¸­. 
 	 */
 	@ModelAttribute
 	public void getUser(@RequestParam(value="id",required=false) Integer id, 
 			Map<String, Object> map){
 		System.out.println("modelAttribute method");
 		if(id != null){
-			//Ä£Äâ´ÓÊı¾İ¿âÖĞ»ñÈ¡¶ÔÏó
+			//æ¨¡æ‹Ÿä»æ•°æ®åº“ä¸­è·å–å¯¹è±¡
 			User user = new User(1, "Tom", "123456", "tom@atguigu.com", 12);
-			System.out.println("´ÓÊı¾İ¿âÖĞ»ñÈ¡Ò»¸ö¶ÔÏó: " + user);
+			System.out.println("ä»æ•°æ®åº“ä¸­è·å–ä¸€ä¸ªå¯¹è±¡: " + user);
 			
 			map.put("user", user);
 		}
 	}
 	
 	/**
-	 * ÔËĞĞÁ÷³Ì:
-	 * 1. Ö´ĞĞ @ModelAttribute ×¢½âĞŞÊÎµÄ·½·¨: ´ÓÊı¾İ¿âÖĞÈ¡³ö¶ÔÏó, °Ñ¶ÔÏó·ÅÈëµ½ÁË Map ÖĞ. ¼üÎª: user
-	 * 2. SpringMVC ´Ó Map ÖĞÈ¡³ö User ¶ÔÏó, ²¢°Ñ±íµ¥µÄÇëÇó²ÎÊı¸³¸ø¸Ã User ¶ÔÏóµÄ¶ÔÓ¦ÊôĞÔ.
-	 * 3. SpringMVC °ÑÉÏÊö¶ÔÏó´«ÈëÄ¿±ê·½·¨µÄ²ÎÊı. 
+	 * è¿è¡Œæµç¨‹:
+	 * 1. æ‰§è¡Œ @ModelAttribute æ³¨è§£ä¿®é¥°çš„æ–¹æ³•: ä»æ•°æ®åº“ä¸­å–å‡ºå¯¹è±¡, æŠŠå¯¹è±¡æ”¾å…¥åˆ°äº† Map ä¸­. é”®ä¸º: user
+	 * 2. SpringMVC ä» Map ä¸­å–å‡º User å¯¹è±¡, å¹¶æŠŠè¡¨å•çš„è¯·æ±‚å‚æ•°èµ‹ç»™è¯¥ User å¯¹è±¡çš„å¯¹åº”å±æ€§.
+	 * 3. SpringMVC æŠŠä¸Šè¿°å¯¹è±¡ä¼ å…¥ç›®æ ‡æ–¹æ³•çš„å‚æ•°. 
 	 * 
-	 * ×¢Òâ: ÔÚ @ModelAttribute ĞŞÊÎµÄ·½·¨ÖĞ, ·ÅÈëµ½ Map Ê±µÄ¼üĞèÒªºÍÄ¿±ê·½·¨Èë²ÎÀàĞÍµÄµÚÒ»¸ö×ÖÄ¸Ğ¡Ğ´µÄ×Ö·û´®Ò»ÖÂ!
+	 * æ³¨æ„: åœ¨ @ModelAttribute ä¿®é¥°çš„æ–¹æ³•ä¸­, æ”¾å…¥åˆ° Map æ—¶çš„é”®éœ€è¦å’Œç›®æ ‡æ–¹æ³•å…¥å‚ç±»å‹çš„ç¬¬ä¸€ä¸ªå­—æ¯å°å†™çš„å­—ç¬¦ä¸²ä¸€è‡´!
 	 * 
-	 * SpringMVC È·¶¨Ä¿±ê·½·¨ POJO ÀàĞÍÈë²ÎµÄ¹ı³Ì
-	 * 1. È·¶¨Ò»¸ö key:
-	 * 1). ÈôÄ¿±ê·½·¨µÄ POJO ÀàĞÍµÄ²ÎÊıÄ¾ÓĞÊ¹ÓÃ @ModelAttribute ×÷ÎªĞŞÊÎ, Ôò key Îª POJO ÀàÃûµÚÒ»¸ö×ÖÄ¸µÄĞ¡Ğ´
-	 * 2). ÈôÊ¹ÓÃÁË  @ModelAttribute À´ĞŞÊÎ, Ôò key Îª @ModelAttribute ×¢½âµÄ value ÊôĞÔÖµ. 
-	 * 2. ÔÚ implicitModel ÖĞ²éÕÒ key ¶ÔÓ¦µÄ¶ÔÏó, Èô´æÔÚ, Ôò×÷ÎªÈë²Î´«Èë
-	 * 1). ÈôÔÚ @ModelAttribute ±ê¼ÇµÄ·½·¨ÖĞÔÚ Map ÖĞ±£´æ¹ı, ÇÒ key ºÍ 1 È·¶¨µÄ key Ò»ÖÂ, Ôò»á»ñÈ¡µ½. 
-	 * 3. Èô implicitModel ÖĞ²»´æÔÚ key ¶ÔÓ¦µÄ¶ÔÏó, Ôò¼ì²éµ±Ç°µÄ Handler ÊÇ·ñÊ¹ÓÃ @SessionAttributes ×¢½âĞŞÊÎ, 
-	 * ÈôÊ¹ÓÃÁË¸Ã×¢½â, ÇÒ @SessionAttributes ×¢½âµÄ value ÊôĞÔÖµÖĞ°üº¬ÁË key, Ôò»á´Ó HttpSession ÖĞÀ´»ñÈ¡ key Ëù
-	 * ¶ÔÓ¦µÄ value Öµ, Èô´æÔÚÔòÖ±½Ó´«Èëµ½Ä¿±ê·½·¨µÄÈë²ÎÖĞ. Èô²»´æÔÚÔò½«Å×³öÒì³£. 
-	 * 4. Èô Handler Ã»ÓĞ±êÊ¶ @SessionAttributes ×¢½â»ò @SessionAttributes ×¢½âµÄ value ÖµÖĞ²»°üº¬ key, Ôò
-	 * »áÍ¨¹ı·´ÉäÀ´´´½¨ POJO ÀàĞÍµÄ²ÎÊı, ´«ÈëÎªÄ¿±ê·½·¨µÄ²ÎÊı
-	 * 5. SpringMVC »á°Ñ key ºÍ POJO ÀàĞÍµÄ¶ÔÏó±£´æµ½ implicitModel ÖĞ, ½ø¶ø»á±£´æµ½ request ÖĞ. 
+	 * SpringMVC ç¡®å®šç›®æ ‡æ–¹æ³• POJO ç±»å‹å…¥å‚çš„è¿‡ç¨‹
+	 * 1. ç¡®å®šä¸€ä¸ª key:
+	 * 1). è‹¥ç›®æ ‡æ–¹æ³•çš„ POJO ç±»å‹çš„å‚æ•°æœ¨æœ‰ä½¿ç”¨ @ModelAttribute ä½œä¸ºä¿®é¥°, åˆ™ key ä¸º POJO ç±»åç¬¬ä¸€ä¸ªå­—æ¯çš„å°å†™
+	 * 2). è‹¥ä½¿ç”¨äº†  @ModelAttribute æ¥ä¿®é¥°, åˆ™ key ä¸º @ModelAttribute æ³¨è§£çš„ value å±æ€§å€¼. 
+	 * 2. åœ¨ implicitModel ä¸­æŸ¥æ‰¾ key å¯¹åº”çš„å¯¹è±¡, è‹¥å­˜åœ¨, åˆ™ä½œä¸ºå…¥å‚ä¼ å…¥
+	 * 1). è‹¥åœ¨ @ModelAttribute æ ‡è®°çš„æ–¹æ³•ä¸­åœ¨ Map ä¸­ä¿å­˜è¿‡, ä¸” key å’Œ 1 ç¡®å®šçš„ key ä¸€è‡´, åˆ™ä¼šè·å–åˆ°. 
+	 * 3. è‹¥ implicitModel ä¸­ä¸å­˜åœ¨ key å¯¹åº”çš„å¯¹è±¡, åˆ™æ£€æŸ¥å½“å‰çš„ Handler æ˜¯å¦ä½¿ç”¨ @SessionAttributes æ³¨è§£ä¿®é¥°, 
+	 * è‹¥ä½¿ç”¨äº†è¯¥æ³¨è§£, ä¸” @SessionAttributes æ³¨è§£çš„ value å±æ€§å€¼ä¸­åŒ…å«äº† key, åˆ™ä¼šä» HttpSession ä¸­æ¥è·å– key æ‰€
+	 * å¯¹åº”çš„ value å€¼, è‹¥å­˜åœ¨åˆ™ç›´æ¥ä¼ å…¥åˆ°ç›®æ ‡æ–¹æ³•çš„å…¥å‚ä¸­. è‹¥ä¸å­˜åœ¨åˆ™å°†æŠ›å‡ºå¼‚å¸¸. 
+	 * 4. è‹¥ Handler æ²¡æœ‰æ ‡è¯† @SessionAttributes æ³¨è§£æˆ– @SessionAttributes æ³¨è§£çš„ value å€¼ä¸­ä¸åŒ…å« key, åˆ™
+	 * ä¼šé€šè¿‡åå°„æ¥åˆ›å»º POJO ç±»å‹çš„å‚æ•°, ä¼ å…¥ä¸ºç›®æ ‡æ–¹æ³•çš„å‚æ•°
+	 * 5. SpringMVC ä¼šæŠŠ key å’Œ POJO ç±»å‹çš„å¯¹è±¡ä¿å­˜åˆ° implicitModel ä¸­, è¿›è€Œä¼šä¿å­˜åˆ° request ä¸­. 
 	 * 
-	 * Ô´´úÂë·ÖÎöµÄÁ÷³Ì
-	 * 1. µ÷ÓÃ @ModelAttribute ×¢½âĞŞÊÎµÄ·½·¨. Êµ¼ÊÉÏ°Ñ @ModelAttribute ·½·¨ÖĞ Map ÖĞµÄÊı¾İ·ÅÔÚÁË implicitModel ÖĞ.
-	 * 2. ½âÎöÇëÇó´¦ÀíÆ÷µÄÄ¿±ê²ÎÊı, Êµ¼ÊÉÏ¸ÃÄ¿±ê²ÎÊıÀ´×ÔÓÚ WebDataBinder ¶ÔÏóµÄ target ÊôĞÔ
-	 * 1). ´´½¨ WebDataBinder ¶ÔÏó:
-	 * ¢Ù. È·¶¨ objectName ÊôĞÔ: Èô´«ÈëµÄ attrName ÊôĞÔÖµÎª "", Ôò objectName ÎªÀàÃûµÚÒ»¸ö×ÖÄ¸Ğ¡Ğ´. 
-	 * *×¢Òâ: attrName. ÈôÄ¿±ê·½·¨µÄ POJO ÊôĞÔÊ¹ÓÃÁË @ModelAttribute À´ĞŞÊÎ, Ôò attrName Öµ¼´Îª @ModelAttribute 
-	 * µÄ value ÊôĞÔÖµ 
+	 * æºä»£ç åˆ†æçš„æµç¨‹
+	 * 1. è°ƒç”¨ @ModelAttribute æ³¨è§£ä¿®é¥°çš„æ–¹æ³•. å®é™…ä¸ŠæŠŠ @ModelAttribute æ–¹æ³•ä¸­ Map ä¸­çš„æ•°æ®æ”¾åœ¨äº† implicitModel ä¸­.
+	 * 2. è§£æè¯·æ±‚å¤„ç†å™¨çš„ç›®æ ‡å‚æ•°, å®é™…ä¸Šè¯¥ç›®æ ‡å‚æ•°æ¥è‡ªäº WebDataBinder å¯¹è±¡çš„ target å±æ€§
+	 * 1). åˆ›å»º WebDataBinder å¯¹è±¡:
+	 * â‘ . ç¡®å®š objectName å±æ€§: è‹¥ä¼ å…¥çš„ attrName å±æ€§å€¼ä¸º "", åˆ™ objectName ä¸ºç±»åç¬¬ä¸€ä¸ªå­—æ¯å°å†™. 
+	 * *æ³¨æ„: attrName. è‹¥ç›®æ ‡æ–¹æ³•çš„ POJO å±æ€§ä½¿ç”¨äº† @ModelAttribute æ¥ä¿®é¥°, åˆ™ attrName å€¼å³ä¸º @ModelAttribute 
+	 * çš„ value å±æ€§å€¼ 
 	 * 
-	 * ¢Ú. È·¶¨ target ÊôĞÔ:
-	 * 	> ÔÚ implicitModel ÖĞ²éÕÒ attrName ¶ÔÓ¦µÄÊôĞÔÖµ. Èô´æÔÚ, ok
-	 * 	> *Èô²»´æÔÚ: ÔòÑéÖ¤µ±Ç° Handler ÊÇ·ñÊ¹ÓÃÁË @SessionAttributes ½øĞĞĞŞÊÎ, ÈôÊ¹ÓÃÁË, Ôò³¢ÊÔ´Ó Session ÖĞ
-	 * »ñÈ¡ attrName Ëù¶ÔÓ¦µÄÊôĞÔÖµ. Èô session ÖĞÃ»ÓĞ¶ÔÓ¦µÄÊôĞÔÖµ, ÔòÅ×³öÁËÒì³£. 
-	 * 	> Èô Handler Ã»ÓĞÊ¹ÓÃ @SessionAttributes ½øĞĞĞŞÊÎ, »ò @SessionAttributes ÖĞÃ»ÓĞÊ¹ÓÃ value ÖµÖ¸¶¨µÄ key
-	 * ºÍ attrName ÏàÆ¥Åä, ÔòÍ¨¹ı·´Éä´´½¨ÁË POJO ¶ÔÏó
+	 * â‘¡. ç¡®å®š target å±æ€§:
+	 * 	> åœ¨ implicitModel ä¸­æŸ¥æ‰¾ attrName å¯¹åº”çš„å±æ€§å€¼. è‹¥å­˜åœ¨, ok
+	 * 	> *è‹¥ä¸å­˜åœ¨: åˆ™éªŒè¯å½“å‰ Handler æ˜¯å¦ä½¿ç”¨äº† @SessionAttributes è¿›è¡Œä¿®é¥°, è‹¥ä½¿ç”¨äº†, åˆ™å°è¯•ä» Session ä¸­
+	 * è·å– attrName æ‰€å¯¹åº”çš„å±æ€§å€¼. è‹¥ session ä¸­æ²¡æœ‰å¯¹åº”çš„å±æ€§å€¼, åˆ™æŠ›å‡ºäº†å¼‚å¸¸. 
+	 * 	> è‹¥ Handler æ²¡æœ‰ä½¿ç”¨ @SessionAttributes è¿›è¡Œä¿®é¥°, æˆ– @SessionAttributes ä¸­æ²¡æœ‰ä½¿ç”¨ value å€¼æŒ‡å®šçš„ key
+	 * å’Œ attrName ç›¸åŒ¹é…, åˆ™é€šè¿‡åå°„åˆ›å»ºäº† POJO å¯¹è±¡
 	 * 
-	 * 2). SpringMVC °Ñ±íµ¥µÄÇëÇó²ÎÊı¸³¸øÁË WebDataBinder µÄ target ¶ÔÓ¦µÄÊôĞÔ. 
-	 * 3). *SpringMVC »á°Ñ WebDataBinder µÄ attrName ºÍ target ¸øµ½ implicitModel. 
-	 * ½ü¶ø´«µ½ request Óò¶ÔÏóÖĞ. 
-	 * 4). °Ñ WebDataBinder µÄ target ×÷Îª²ÎÊı´«µİ¸øÄ¿±ê·½·¨µÄÈë²Î. 
+	 * 2). SpringMVC æŠŠè¡¨å•çš„è¯·æ±‚å‚æ•°èµ‹ç»™äº† WebDataBinder çš„ target å¯¹åº”çš„å±æ€§. 
+	 * 3). *SpringMVC ä¼šæŠŠ WebDataBinder çš„ attrName å’Œ target ç»™åˆ° implicitModel. 
+	 * è¿‘è€Œä¼ åˆ° request åŸŸå¯¹è±¡ä¸­. 
+	 * 4). æŠŠ WebDataBinder çš„ target ä½œä¸ºå‚æ•°ä¼ é€’ç»™ç›®æ ‡æ–¹æ³•çš„å…¥å‚. 
 	 */
 	@RequestMapping("/testModelAttribute")
 	public String testModelAttribute(User user){
-		System.out.println("ĞŞ¸Ä: " + user);
+		System.out.println("ä¿®æ”¹: " + user);
 		return SUCCESS;
 	}
 	
 	/**
-	 * @SessionAttributes ³ıÁË¿ÉÒÔÍ¨¹ıÊôĞÔÃûÖ¸¶¨ĞèÒª·Åµ½»á»°ÖĞµÄÊôĞÔÍâ(Êµ¼ÊÉÏÊ¹ÓÃµÄÊÇ value ÊôĞÔÖµ),
-	 * »¹¿ÉÒÔÍ¨¹ıÄ£ĞÍÊôĞÔµÄ¶ÔÏóÀàĞÍÖ¸¶¨ÄÄĞ©Ä£ĞÍÊôĞÔĞèÒª·Åµ½»á»°ÖĞ(Êµ¼ÊÉÏÊ¹ÓÃµÄÊÇ types ÊôĞÔÖµ)
+	 * @SessionAttributes é™¤äº†å¯ä»¥é€šè¿‡å±æ€§åæŒ‡å®šéœ€è¦æ”¾åˆ°ä¼šè¯ä¸­çš„å±æ€§å¤–(å®é™…ä¸Šä½¿ç”¨çš„æ˜¯ value å±æ€§å€¼),
+	 * è¿˜å¯ä»¥é€šè¿‡æ¨¡å‹å±æ€§çš„å¯¹è±¡ç±»å‹æŒ‡å®šå“ªäº›æ¨¡å‹å±æ€§éœ€è¦æ”¾åˆ°ä¼šè¯ä¸­(å®é™…ä¸Šä½¿ç”¨çš„æ˜¯ types å±æ€§å€¼)
 	 * 
-	 * ×¢Òâ: ¸Ã×¢½âÖ»ÄÜ·ÅÔÚÀàµÄÉÏÃæ. ¶ø²»ÄÜĞŞÊÎ·Å·½·¨. 
+	 * æ³¨æ„: è¯¥æ³¨è§£åªèƒ½æ”¾åœ¨ç±»çš„ä¸Šé¢. è€Œä¸èƒ½ä¿®é¥°æ”¾æ–¹æ³•. 
 	 */
 	@RequestMapping("/testSessionAttributes")
 	public String testSessionAttributes(Map<String, Object> map){
@@ -128,7 +128,7 @@ public class SpringMVCTest {
 	}
 	
 	/**
-	 * Ä¿±ê·½·¨¿ÉÒÔÌí¼Ó Map ÀàĞÍ(Êµ¼ÊÉÏÒ²¿ÉÒÔÊÇ Model ÀàĞÍ»ò ModelMap ÀàĞÍ)µÄ²ÎÊı. 
+	 * ç›®æ ‡æ–¹æ³•å¯ä»¥æ·»åŠ  Map ç±»å‹(å®é™…ä¸Šä¹Ÿå¯ä»¥æ˜¯ Model ç±»å‹æˆ– ModelMap ç±»å‹)çš„å‚æ•°. 
 	 * @param map
 	 * @return
 	 */
@@ -140,9 +140,9 @@ public class SpringMVCTest {
 	}
 	
 	/**
-	 * Ä¿±ê·½·¨µÄ·µ»ØÖµ¿ÉÒÔÊÇ ModelAndView ÀàĞÍ¡£ 
-	 * ÆäÖĞ¿ÉÒÔ°üº¬ÊÓÍ¼ºÍÄ£ĞÍĞÅÏ¢
-	 * SpringMVC »á°Ñ ModelAndView µÄ model ÖĞÊı¾İ·ÅÈëµ½ request Óò¶ÔÏóÖĞ. 
+	 * ç›®æ ‡æ–¹æ³•çš„è¿”å›å€¼å¯ä»¥æ˜¯ ModelAndView ç±»å‹ã€‚ 
+	 * å…¶ä¸­å¯ä»¥åŒ…å«è§†å›¾å’Œæ¨¡å‹ä¿¡æ¯
+	 * SpringMVC ä¼šæŠŠ ModelAndView çš„ model ä¸­æ•°æ®æ”¾å…¥åˆ° request åŸŸå¯¹è±¡ä¸­. 
 	 * @return
 	 */
 	@RequestMapping("/testModelAndView")
@@ -150,14 +150,14 @@ public class SpringMVCTest {
 		String viewName = SUCCESS;
 		ModelAndView modelAndView = new ModelAndView(viewName);
 		
-		//Ìí¼ÓÄ£ĞÍÊı¾İµ½ ModelAndView ÖĞ.
+		//æ·»åŠ æ¨¡å‹æ•°æ®åˆ° ModelAndView ä¸­.
 		modelAndView.addObject("time", new Date());
 		
 		return modelAndView;
 	}
 	
 	/**
-	 * ¿ÉÒÔÊ¹ÓÃ Serlvet Ô­ÉúµÄ API ×÷ÎªÄ¿±ê·½·¨µÄ²ÎÊı ¾ßÌåÖ§³ÖÒÔÏÂÀàĞÍ
+	 * å¯ä»¥ä½¿ç”¨ Serlvet åŸç”Ÿçš„ API ä½œä¸ºç›®æ ‡æ–¹æ³•çš„å‚æ•° å…·ä½“æ”¯æŒä»¥ä¸‹ç±»å‹
 	 * 
 	 * HttpServletRequest 
 	 * HttpServletResponse 
@@ -178,8 +178,8 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * Spring MVC »á°´ÇëÇó²ÎÊıÃûºÍ POJO ÊôĞÔÃû½øĞĞ×Ô¶¯Æ¥Åä£¬ ×Ô¶¯Îª¸Ã¶ÔÏóÌî³äÊôĞÔÖµ¡£Ö§³Ö¼¶ÁªÊôĞÔ¡£
-	 * Èç£ºdept.deptId¡¢dept.address.tel µÈ
+	 * Spring MVC ä¼šæŒ‰è¯·æ±‚å‚æ•°åå’Œ POJO å±æ€§åè¿›è¡Œè‡ªåŠ¨åŒ¹é…ï¼Œ è‡ªåŠ¨ä¸ºè¯¥å¯¹è±¡å¡«å……å±æ€§å€¼ã€‚æ”¯æŒçº§è”å±æ€§ã€‚
+	 * å¦‚ï¼šdept.deptIdã€dept.address.tel ç­‰
 	 */
 	@RequestMapping("/testPojo")
 	public String testPojo(User user) {
@@ -188,9 +188,9 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * ÁË½â:
+	 * äº†è§£:
 	 * 
-	 * @CookieValue: Ó³ÉäÒ»¸ö Cookie Öµ. ÊôĞÔÍ¬ @RequestParam
+	 * @CookieValue: æ˜ å°„ä¸€ä¸ª Cookie å€¼. å±æ€§åŒ @RequestParam
 	 */
 	@RequestMapping("/testCookieValue")
 	public String testCookieValue(@CookieValue("JSESSIONID") String sessionId) {
@@ -199,7 +199,7 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * ÁË½â: Ó³ÉäÇëÇóÍ·ĞÅÏ¢ ÓÃ·¨Í¬ @RequestParam
+	 * äº†è§£: æ˜ å°„è¯·æ±‚å¤´ä¿¡æ¯ ç”¨æ³•åŒ @RequestParam
 	 */
 	@RequestMapping("/testRequestHeader")
 	public String testRequestHeader(
@@ -209,8 +209,8 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * @RequestParam À´Ó³ÉäÇëÇó²ÎÊı. value Öµ¼´ÇëÇó²ÎÊıµÄ²ÎÊıÃû required ¸Ã²ÎÊıÊÇ·ñ±ØĞë. Ä¬ÈÏÎª true
-	 *               defaultValue ÇëÇó²ÎÊıµÄÄ¬ÈÏÖµ
+	 * @RequestParam æ¥æ˜ å°„è¯·æ±‚å‚æ•°. value å€¼å³è¯·æ±‚å‚æ•°çš„å‚æ•°å required è¯¥å‚æ•°æ˜¯å¦å¿…é¡». é»˜è®¤ä¸º true
+	 *               defaultValue è¯·æ±‚å‚æ•°çš„é»˜è®¤å€¼
 	 */
 	@RequestMapping(value = "/testRequestParam")
 	public String testRequestParam(
@@ -222,13 +222,13 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * Rest ·ç¸ñµÄ URL. ÒÔ CRUD ÎªÀı: ĞÂÔö: /order POST ĞŞ¸Ä: /order/1 PUT update?id=1 »ñÈ¡:
-	 * /order/1 GET get?id=1 É¾³ı: /order/1 DELETE delete?id=1
+	 * Rest é£æ ¼çš„ URL. ä»¥ CRUD ä¸ºä¾‹: æ–°å¢: /order POST ä¿®æ”¹: /order/1 PUT update?id=1 è·å–:
+	 * /order/1 GET get?id=1 åˆ é™¤: /order/1 DELETE delete?id=1
 	 * 
-	 * ÈçºÎ·¢ËÍ PUT ÇëÇóºÍ DELETE ÇëÇóÄØ ? 1. ĞèÒªÅäÖÃ HiddenHttpMethodFilter 2. ĞèÒª·¢ËÍ POST ÇëÇó
-	 * 3. ĞèÒªÔÚ·¢ËÍ POST ÇëÇóÊ±Ğ¯´øÒ»¸ö name="_method" µÄÒş²ØÓò, ÖµÎª DELETE »ò PUT
+	 * å¦‚ä½•å‘é€ PUT è¯·æ±‚å’Œ DELETE è¯·æ±‚å‘¢ ? 1. éœ€è¦é…ç½® HiddenHttpMethodFilter 2. éœ€è¦å‘é€ POST è¯·æ±‚
+	 * 3. éœ€è¦åœ¨å‘é€ POST è¯·æ±‚æ—¶æºå¸¦ä¸€ä¸ª name="_method" çš„éšè—åŸŸ, å€¼ä¸º DELETE æˆ– PUT
 	 * 
-	 * ÔÚ SpringMVC µÄÄ¿±ê·½·¨ÖĞÈçºÎµÃµ½ id ÄØ? Ê¹ÓÃ @PathVariable ×¢½â
+	 * åœ¨ SpringMVC çš„ç›®æ ‡æ–¹æ³•ä¸­å¦‚ä½•å¾—åˆ° id å‘¢? ä½¿ç”¨ @PathVariable æ³¨è§£
 	 * 
 	 */
 	@RequestMapping(value = "/testRest/{id}", method = RequestMethod.PUT)
@@ -256,7 +256,7 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * @PathVariable ¿ÉÒÔÀ´Ó³Éä URL ÖĞµÄÕ¼Î»·ûµ½Ä¿±ê·½·¨µÄ²ÎÊıÖĞ.
+	 * @PathVariable å¯ä»¥æ¥æ˜ å°„ URL ä¸­çš„å ä½ç¬¦åˆ°ç›®æ ‡æ–¹æ³•çš„å‚æ•°ä¸­.
 	 * @param id
 	 * @return
 	 */
@@ -273,7 +273,7 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * ÁË½â: ¿ÉÒÔÊ¹ÓÃ params ºÍ headers À´¸ü¼Ó¾«È·µÄÓ³ÉäÇëÇó. params ºÍ headers Ö§³Ö¼òµ¥µÄ±í´ïÊ½.
+	 * äº†è§£: å¯ä»¥ä½¿ç”¨ params å’Œ headers æ¥æ›´åŠ ç²¾ç¡®çš„æ˜ å°„è¯·æ±‚. params å’Œ headers æ”¯æŒç®€å•çš„è¡¨è¾¾å¼.
 	 * 
 	 * @return
 	 */
@@ -285,7 +285,7 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * ³£ÓÃ: Ê¹ÓÃ method ÊôĞÔÀ´Ö¸¶¨ÇëÇó·½Ê½
+	 * å¸¸ç”¨: ä½¿ç”¨ method å±æ€§æ¥æŒ‡å®šè¯·æ±‚æ–¹å¼
 	 */
 	@RequestMapping(value = "/testMethod", method = RequestMethod.POST)
 	public String testMethod() {
@@ -294,9 +294,9 @@ public class SpringMVCTest {
 	}
 
 	/**
-	 * 1. @RequestMapping ³ıÁËĞŞÊÎ·½·¨, »¹¿ÉÀ´ĞŞÊÎÀà 2. 1). Àà¶¨Òå´¦: Ìá¹©³õ²½µÄÇëÇóÓ³ÉäĞÅÏ¢¡£Ïà¶ÔÓÚ WEB Ó¦ÓÃµÄ¸ùÄ¿Â¼
-	 * 2). ·½·¨´¦: Ìá¹©½øÒ»²½µÄÏ¸·ÖÓ³ÉäĞÅÏ¢¡£ Ïà¶ÔÓÚÀà¶¨Òå´¦µÄ URL¡£ÈôÀà¶¨Òå´¦Î´±ê×¢ @RequestMapping£¬Ôò·½·¨´¦±ê¼ÇµÄ URL
-	 * Ïà¶ÔÓÚ WEB Ó¦ÓÃµÄ¸ùÄ¿Â¼
+	 * 1. @RequestMapping é™¤äº†ä¿®é¥°æ–¹æ³•, è¿˜å¯æ¥ä¿®é¥°ç±» 2. 1). ç±»å®šä¹‰å¤„: æä¾›åˆæ­¥çš„è¯·æ±‚æ˜ å°„ä¿¡æ¯ã€‚ç›¸å¯¹äº WEB åº”ç”¨çš„æ ¹ç›®å½•
+	 * 2). æ–¹æ³•å¤„: æä¾›è¿›ä¸€æ­¥çš„ç»†åˆ†æ˜ å°„ä¿¡æ¯ã€‚ ç›¸å¯¹äºç±»å®šä¹‰å¤„çš„ URLã€‚è‹¥ç±»å®šä¹‰å¤„æœªæ ‡æ³¨ @RequestMappingï¼Œåˆ™æ–¹æ³•å¤„æ ‡è®°çš„ URL
+	 * ç›¸å¯¹äº WEB åº”ç”¨çš„æ ¹ç›®å½•
 	 */
 	@RequestMapping("/testRequestMapping")
 	public String testRequestMapping() {
