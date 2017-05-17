@@ -16,6 +16,8 @@ public class cutFile {
 		String line2 = reader.readLine();
 		String end = "\n</testResults>";
 
+		
+		
 		String tempString = null;
 		FileWriter writer = null;
 		FileWriter writerErr = null;
